@@ -1,0 +1,6 @@
+[string]$path0 = "DC=tierslieux86,DC=fr"
+[string]$path1 = "OU=ETP Chasseneuil,$path0"
+[string]$path21 = "OU=Clients entreprises,$path1"
+[string]$path22 = "OU=Groupes,$path1"
+[string]$path31 = "OU=Groupes globaux,$path22"
+[string]$path32 = "OU=Groupes domaine local,$path22"
