@@ -42,7 +42,7 @@ L'ensemble du dossier doit être déplacé dans le répertoire de l'administrate
 |-- USERS<br>
 |       :-- LOGINS
 |       :           => Dossier à créer, qui contiendra les sous-dossiers des entreprises, chacun contenant un document de
-|       :             connexion au format .odt nominatif, pour chaque utilisateur
+|       :             connexion au format .docx nominatif, pour chaque utilisateur
 |       :-- CSV_Users
 |       :           => Dossier contenant les fichiers .csv des utilisateurs à créer et intégrer
 |       :-- IntegrationAGDLP.ps1
