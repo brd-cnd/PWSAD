@@ -34,7 +34,7 @@ L'ensemble du dossier doit être déplacé dans le répertoire de l'administrate
 |       :              avant que ces derniers ne soient créés, contrôle de saisie, affichage de la réussite ou de
 |       :              l'échec d'une opération
 |-- USERS<br>
-|       :-- USERS
+|       :-- LOGINS
 |       :           => Dossier à créer, qui contiendra les sous-dossiers des entreprises, chacun contenant un document de
 |       :             connexion au format .odt nominatif, pour chaque utilisateur
 |       :-- CSV_Users
@@ -48,4 +48,32 @@ L'ensemble du dossier doit être déplacé dans le répertoire de l'administrate
 _NB IntegrationAGDLP2.ps1 : Au départ, l'idée était de créer un groupe par service et par droit (on crée les groupes GG-NomEntreprise-NomService-Droit et DL-NomEntreprise-NomService-Droit). Les droits sont "L", "LM" et "CT" pour Lecture, Lecture et Modification et Contrôle Total. Ils sont paramétrés via NTFS selon la règle du droit le plus restrictif. Les droits de Partage sont donc réflés sur "Tout le monde". Ce plan a échoué car étrangement instable (plus de détails dans la documentation du projet EvolSysWin). Par manque de temps, les groupes domaines local ont été créés selon le fichier partagé (ex : DL-NomEntreprise-NomFichier-droit). Voir le screenshot de l'exécution de ce script en allant sur le projet EvolSysWin : copiez "Le script va créer des groupes domaine local en fonction du nom de la ressource à partager.", tapez Ctrl+f, et collez. La capture se trouve en dessous de cette phrase._
 
 ### Résultats attendus de l'exécution du script
+Le script doit
 
+## Tester ce script
+
+### Environnement
+Le système d'exploitation recommandé est Windows Server 2022, car c'est sous celui-ci que ce script a été écrit et testé.<br>
+Préparatifs :<br>
+- Avoir créé un domaine Active Directory nommé tierslieux86.fr ;<br>
+- Modifier la police d'exécution des scripts, si cela pose problème (un tuto d'IT-Connect ici : https://www.it-connect.fr/autoriser-lexecution-de-scripts-powershell/. Dans le cadre de ce lab, j'ai fait : Set-ExecutionPolicy Unrestricted -Scope CurrentUser) ;<br>
+- Importer et installer le module PSWriteWord (documentation officielle ici : https://www.powershellgallery.com/packages/PSWriteWord/1.0.1. Personnellement, je l'ai téléchargé sur mon ordinateur puis transféré sur la VM car le réseau était lent. J'ai ensuite installé le module. Le script IntegrationAGDLP.ps1 va recharger ce module.) ;<br>
+- Déplacer l'ensemble du dossier dans le répertoire de l'administrateur : C:\Users\Administrateur ;<br>
+- Créer dans le dossier USERS le répertoire LOGINS qui contiendra les documents de connexion.
+
+### Exécution du script
+Avant toute chose, vous avez deux choix :<br>
+- Soit vous utilisez les fichiers .csv déjà présents dans le dossier PWSAD pour l'intégration des utilisateurs. Il s'agit des entreprises "ValorElec", "Esporting" et "3DPrint86". Si vous choisissez d'intégrer l'une de ces trois entreprises, saisissez l'un de ces trois noms (en respectant la casse) ;<br>
+- Soit vous voulez intégrer une nouvelle entreprise. Il faut préparer en amont le fichier .csv qui doit contenir le nom, prénom, statut ("Employés" ou "Responsables") et service. Pour le nom et prénom, les lettres communes en français ("ç", tirets pour les noms composés, etc.) ne devraient pas poser de problème. Pour les services, rien n'est moins sûr : évitez les caractères accentués. De manière générale, les caractères spéciaux ne sont pas les bienvenus (*,$,£,...). Le nom de ce fichier .csv devra suivre la syntaxe suivante : nomDeVotreEntreprise-Users.csv. Il devra être placé dans USERS > CSV_Users
+
+Puis, exécutez dans l'ordre :<br>
+- ArborescencePrimaire.ps1<br>
+- CreationUnitesEntreprise.ps1<br>
+- IntegrationAGDLP.ps1<br>
+- IntegrationAGDLP2.ps1<br>
+
+## Notes
+Ce script m'a permis, en tant qu'étudiante en réseaux, de travailler les structures algorithmiques de base (boucles de vérification, conditions,...). En ce sens, il n'est pas optimisé : ce n'était pas le but, même s'il existe des fonctions natives qui permettent d'aller plus vite. Pour apprendre, je n'ai donc pas utilisé l'IA, sauf pour la fonction de normalisation des caractères.<br>
+En raison des contraintes de temps, je n'ai pas pu faire tout ce que je voulais (par exemple, je souhaitais que l'adminstrateur saisisse son mot de passe).<br>
+Comme mentionné plus haut, certaines autres contraintes m'ont poussée à choisir des solutions parfois peu optimisées (cf. partie AGDLP).<br>
+N'hésitez pas à me joindre si vous constatez une erreur.
