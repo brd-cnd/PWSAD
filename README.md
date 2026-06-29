@@ -5,7 +5,7 @@ Comme mentionné plus bas, certaines autres contraintes m'ont poussée à choisi
 N'hésitez pas à me joindre si vous constatez une erreur, via l'adresse disponible sur le portfolio Greenbeans.
 
 ## TLDR : résultats attendus de l'exécution du script
-Rendez-vous sur https://brd-cnd.github.io/greenbeans/pro-evolsyswin ("Résultats de la mission 1") pour voir comment le script est censé se dérouler.
+Rendez-vous sur https://brd-cnd.github.io/greenbeans/pro-evolsyswin ("Résultats de la mission 1" et "Résultats de la mission 3") pour voir comment le script est censé se dérouler.
 
 ## Présentation
 ### Contexte du devoir
