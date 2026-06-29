@@ -9,23 +9,18 @@ Tierslieux86 est une entreprise qui met à disposition des entreprises des espac
 L'ensemble du dossier doit être déplacé dans le répertoire de l'administrateur : C:\Users\Administrateur. L'arborescence est la suivante :
 
 |-- CSTES _dossier contenant les constantes communes aux différents scripts_<br>
-|&nbsp;&nbsp;|-- ConstsPathsAGDLP.ps1 _paths des dossiers utilisés pour la création des comptes utilisateurs_
-
-|     |-- ConstsPathsModules.ps1 _paths redirigeant vers les modules_
-
-|     |-- ConstsPathsOU.ps1 _paths des unités d'organisation de l'arborescence Active Directory de l'entreprise Tierslieux86_
-
-|-- INFRASTRUCTURE
-
-|     |-- AborescencePrimaire.ps1 _script de création de l'arbodescence primaire (i.e : unités d'organisation proches de la racine - niveaux 1 à 2)_
-
-|     |-- CreationUnitesEntreprise.ps1 _script de création des unités d'organisation propres à l'entreprise cliente_
-
-|-- MODULES
-
-|     |-- MdlAffichages.psm1 _fonctions d'affichage de messages de début et de fin du programme, fonction de vérification des droits administrateurs pour l'utilisateur exécutant le script_
-
-|-- USERS
+|&nbsp;&nbsp;&nbsp;|-- ConstsPathsAGDLP.ps1 _paths des dossiers utilisés pour la création des comptes utilisateurs_<br>
+|&nbsp;&nbsp;&nbsp;|-- ConstsPathsModules.ps1 _paths redirigeant vers les modules_<br>
+|&nbsp;&nbsp;&nbsp;|-- ConstsPathsOU.ps1 _paths des unités d'organisation de l'arborescence Active Directory de l'entreprise Tierslieux86_<br>
+|-- INFRASTRUCTURE<br>
+|&nbsp;&nbsp;&nbsp;|-- AborescencePrimaire.ps1 _script de création de l'arbodescence primaire (i.e : unités d'organisation proches de la racine - niveaux 1 à 2)_<br>
+|&nbsp;&nbsp;&nbsp;|-- CreationUnitesEntreprise.ps1 _script de création des unités d'organisation propres à l'entreprise cliente_<br>
+|-- MODULES<br>
+|&nbsp;&nbsp;&nbsp;|-- MdlAffichages.psm1 _fonctions d'affichage de messages de début et de fin du programme, fonction de vérification des droits administrateurs pour l'utilisateur exécutant le script_<br>
+|&nbsp;&nbsp;&nbsp;|-- MdlCreations.psm1 _fonctions de créations d'objet (comptes utilisateurs), de formatage des données (normalisation des caractères), d'affectation des utilisateurs aux groupes et d'implémentation des règles de nommage (pour les groupes domaine local ou globaux, par exemple)_<br>
+|&nbsp;&nbsp;&nbsp;|-- Mdl
+|-- USERS<br>
+|&nbsp;&nbsp;&nbsp;|-- 
 
 
 
