@@ -75,4 +75,4 @@ Puis, exécutez dans l'ordre :<br>
 - ArborescencePrimaire.ps1<br>
 - CreationUnitesEntreprise.ps1<br>
 - IntegrationAGDLP.ps1<br>
-- IntegrationAGDLP2.ps1<br>
+- ~~IntegrationAGDLP2.ps1~~ : impossible (cf. NB n°2 ci-dessus)<br>
