@@ -10,7 +10,7 @@ L'ensemble du dossier doit être déplacé dans le répertoire de l'administrate
 
 |-- CSTES _dossier contenant les constantes communes aux différents scripts_
 
-|      |-- ConstsPathsAGDLP.ps1 _paths des dossiers utilisés pour la création des comptes utilisateurs_
+|~~~~~~|-- ConstsPathsAGDLP.ps1 _paths des dossiers utilisés pour la création des comptes utilisateurs_
 
 |     |-- ConstsPathsModules.ps1 _paths redirigeant vers les modules_
 
