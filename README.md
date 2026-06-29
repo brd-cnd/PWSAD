@@ -1,8 +1,11 @@
 # PWSAD : scripts d'intégration d'entreprise à l'Espace de Travail Partagé (ETP)
-Ces scripts ont été réalisés dans le cadre d'un atelier professionnel du CNED. Il m'a permis, en tant qu'étudiante en réseaux, de travailler les structures algorithmiques de base (boucles de vérification, conditions,...). En ce sens, il n'est pas optimisé : ce n'était pas le but, même s'il existe des fonctions natives qui permettent d'aller plus vite. Pour apprendre, je n'ai donc pas utilisé l'IA, sauf pour la fonction de normalisation des caractères.<br>
+Ces scripts ont été réalisés dans le cadre d'un atelier professionnel du CNED. Il m'a permis, en tant qu'étudiante en réseaux, de travailler les structures algorithmiques de base (boucles de vérification, conditions,...). En ce sens, il n'est pas optimisé : ce n'était pas le but, même s'il existe des fonctions natives qui permettent d'aller plus vite. Pour apprendre, je n'ai donc pas utilisé l'IA, sauf pour la fonction de normalisation des caractères et pour la vérification des droits administrateurs de l'utilisateur courant.<br>
 En raison des contraintes de temps, je n'ai pas pu faire tout ce que je voulais (par exemple, je souhaitais que l'adminstrateur saisisse son mot de passe).<br>
 Comme mentionné plus bas, certaines autres contraintes m'ont poussée à choisir des solutions parfois peu optimisées.<br>
 N'hésitez pas à me joindre si vous constatez une erreur, via l'adresse disponible sur le portfolio Greenbeans.
+
+## TLDR : résultats attendus de l'exécution du script
+Rendez-vous sur https://brd-cnd.github.io/greenbeans/pro-evolsyswin ("Résultats de la mission 1") pour voir comment le script est censé se dérouler.
 
 ## Présentation
 ### Contexte du devoir
@@ -49,9 +52,6 @@ L'ensemble du dossier doit être déplacé dans le répertoire de l'administrate
 
 ```
 _NB IntegrationAGDLP2.ps1 : Au départ, l'idée était de créer un groupe par service et par droit (on crée les groupes GG-NomEntreprise-NomService-Droit et DL-NomEntreprise-NomService-Droit). Les droits sont "L", "LM" et "CT" pour Lecture, Lecture et Modification et Contrôle Total. Ils sont paramétrés via NTFS selon la règle du droit le plus restrictif. Les droits de Partage sont donc réglés sur "Tout le monde". Ce plan a échoué car étrangement instable (plus de détails dans la documentation du projet EvolSysWin). Par manque de temps, les groupes domaines local ont été créés selon le fichier partagé (ex : DL-NomEntreprise-NomFichier-droit). Voir le screenshot de l'exécution de ce script en allant sur le projet EvolSysWin : copiez la phrase qui suit, "Le script va créer des groupes domaine local en fonction du nom de la ressource à partager.", tapez Ctrl+f, et collez. La capture se trouve en dessous de cette phrase._
-
-### Résultats attendus de l'exécution du script
-Rendez-vous sur https://brd-cnd.github.io/greenbeans/pro-evolsyswin ("Résultats de la mission 1") pour voir comment le script est censé se dérouler.
 
 ## Tester ce script
 
