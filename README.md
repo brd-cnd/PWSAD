@@ -8,9 +8,8 @@ Tierslieux86 est une entreprise qui met à disposition des entreprises des espac
 ### Présentation structurelle
 L'ensemble du dossier doit être déplacé dans le répertoire de l'administrateur : C:\Users\Administrateur. L'arborescence est la suivante :
 
-|-- CSTES _dossier contenant les constantes communes aux différents scripts_
-
-|~~~~~~|-- ConstsPathsAGDLP.ps1 _paths des dossiers utilisés pour la création des comptes utilisateurs_
+|-- CSTES _dossier contenant les constantes communes aux différents scripts_<br>
+|&nbsp;&nbsp;|-- ConstsPathsAGDLP.ps1 _paths des dossiers utilisés pour la création des comptes utilisateurs_
 
 |     |-- ConstsPathsModules.ps1 _paths redirigeant vers les modules_
 
