@@ -48,7 +48,7 @@ L'ensemble du dossier doit être déplacé dans le répertoire de l'administrate
 _NB IntegrationAGDLP2.ps1 : Au départ, l'idée était de créer un groupe par service et par droit (on crée les groupes GG-NomEntreprise-NomService-Droit et DL-NomEntreprise-NomService-Droit). Les droits sont "L", "LM" et "CT" pour Lecture, Lecture et Modification et Contrôle Total. Ils sont paramétrés via NTFS selon la règle du droit le plus restrictif. Les droits de Partage sont donc réflés sur "Tout le monde". Ce plan a échoué car étrangement instable (plus de détails dans la documentation du projet EvolSysWin). Par manque de temps, les groupes domaines local ont été créés selon le fichier partagé (ex : DL-NomEntreprise-NomFichier-droit). Voir le screenshot de l'exécution de ce script en allant sur le projet EvolSysWin : copiez "Le script va créer des groupes domaine local en fonction du nom de la ressource à partager.", tapez Ctrl+f, et collez. La capture se trouve en dessous de cette phrase._
 
 ### Résultats attendus de l'exécution du script
-Le script doit
+Rendez-vous sur https://brd-cnd.github.io/greenbeans/pro-evolsyswin (mission 1) pour voir comment le script est censé se dérouler.
 
 ## Tester ce script
 
