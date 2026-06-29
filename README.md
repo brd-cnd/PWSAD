@@ -9,17 +9,24 @@ Tierslieux86 est une entreprise qui met à disposition des entreprises des espac
 L'ensemble du dossier doit être déplacé dans le répertoire de l'administrateur : C:\Users\Administrateur. L'arborescence est la suivante :<br>
 ```text
 |-- CSTES _dossier contenant les constantes communes aux différents scripts_
-|       :-- ConstsPathsAGDLP.ps1 paths des dossiers utilisés pour la création des comptes utilisateurs
-|       :-- ConstsPathsModules.ps1 paths redirigeant vers les modules_
-|       :-- ConstsPathsOU.ps1 paths des unités d'organisation de l'arborescence Active Directory de l'entreprise Tierslieux86
+|       :-- ConstsPathsAGDLP.ps1
+|       :           => paths des dossiers utilisés pour la création des comptes utilisateurs
+|       :-- ConstsPathsModules.ps1
+|       :           => paths redirigeant vers les modules
+|       :-- ConstsPathsOU.ps1
+|       :           => paths des unités d'organisation de l'arborescence Active Directory de l'entreprise Tierslieux86
 |-- INFRASTRUCTURE
-|       :-- AborescencePrimaire.ps1 script de création de l'arbodescence primaire (i.e : unités d'organisation proches de la racine - niveaux 1 à 2)
-|       :-- CreationUnitesEntreprise.ps1 script de création des unités d'organisation propres à l'entreprise cliente
+|       :-- AborescencePrimaire.ps1
+|       :           => script de création de l'arbodescence primaire (i.e : unités d'organisation proches de la racine - niveaux 1 à 2)
+|       :-- CreationUnitesEntreprise.ps1
+|       :           => script de création des unités d'organisation propres à l'entreprise cliente
 |-- MODULES
-|       :-- MdlAffichages.psm1 fonctions d'affichage de messages de début et de fin du programme, fonction de vérification des droits administrateurs pour l'utilisateur exécutant le script
+|       :-- MdlAffichages.psm1
+|       :           => fonctions d'affichage de messages de début et de fin du programme, fonction de vérification des droits administrateurs pour l'utilisateur exécutant le script
 |       :-- MdlCreations.psm1 fonctions de créations d'objet (comptes utilisateurs), de formatage des données (normalisation des caractères), d'affectation des utilisateurs aux groupes et d'implémentation des règlesde nommage (pour les groupes domaine local ou globaux, par exemple)
 |       :-- MdlVerifications fonctions dédiées la gestion des erreurs : vérification de l'existence de paths ou d'objets avant que ces derniers ne soient créés, contrôle de saisie, affichage de la réussite ou de l'échec d'une opération
 |-- USERS<br>
+|       :-- USERS Dossier à créer, qui contiendra les sous-dossiers des entreprises, chacun contenant un document de connexion au format .odt nominatif, pour chaque utilisateur
 |       :-- CSV_Users Dossier contenant les fichiers .csv des utilisateurs à créer et intégrer
 |       :-- IntegrationAGDLP.ps1 Intégration des utilisateurs à l'Active Directory
 |       :-- IntegrationAGDLP2.ps1 Automatisation de l'imbrication AGDLP.
