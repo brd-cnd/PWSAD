@@ -272,7 +272,7 @@ function RemoveDiacritics{
 
     # Récupération du résultat et élmination des c cédilles
     $result = $builder.ToString() -replace 'ç', 'c' -replace 'Ç', 'C'
-    return $result()
+    return $result
 }
 
 function NormalizeWord{
