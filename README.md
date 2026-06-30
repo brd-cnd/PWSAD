@@ -61,7 +61,14 @@ Le système d'exploitation recommandé est Windows Server 2022, car c'est sous c
 Préparatifs :<br>
 - Avoir créé un domaine Active Directory nommé tierslieux86.fr ;<br>
 - Modifier la police d'exécution des scripts, si cela pose problème (un tuto d'IT-Connect ici : https://www.it-connect.fr/autoriser-lexecution-de-scripts-powershell/. Dans le cadre de ce lab, j'ai fait : Set-ExecutionPolicy Unrestricted -Scope CurrentUser) ;<br>
-- Importer le module PSWriteWord (documentation officielle ici : https://www.powershellgallery.com/packages/PSWriteWord/1.0.1. Personnellement, je l'ai téléchargé sur mon ordinateur puis transféré sur la VM car le réseau était lent. J'ai ensuite installé et importé le module. Le script IntegrationAGDLP.ps1 va recharger ce module.) ;<br>
+- Importer le module PSWriteWord <br>
+_Personnellement, je l'ai téléchargé sur mon ordinateur (https://www.powershellgallery.com/packages/PSWriteWord/1.1.14, puis "Manual Download") et décompressé, puis transféré sur la VM car le réseau était lent. J'ai placé le dossier PSWriteWord dans C:\Program Files\WindowsPowerShell\Modules. Ensuite, sur Powershell on vérifie que le module apparaît avec : Get-Module -ListAvailable PSWriteWord. On devrait avoir en sortie :_<br>
+```text
+ModuleType Version    Name                                ExportedCommands<br>
+---------- -------    ----                                ----------------
+Script     1.1.14     PSWriteWord                         {Get-WordBookmark, Set-WordBookmark, New-WordBlock, New-Wo...
+```
+_Puis, on importe le module avec Import-Module PSWriteWord -Verbose pour importer le module ;_<br>
 - Déplacer l'ensemble du dossier dans le répertoire de l'administrateur : C:\Users\Administrateur ;<br>
 - Créer dans le dossier USERS le répertoire LOGINS qui contiendra les documents de connexion.
 
