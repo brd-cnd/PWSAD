@@ -30,7 +30,10 @@ function GIVE_RIGHTS {
     fonction GIVE_RIGHTS
 
     DESCRIPTION
-    Attribution des droits NTFS
+    Attribution des droits NTFS et partage de fichiers
+    L'administrateur aura contrôle total
+    ==> Normalement, il faut mettre "Tout le monde" en "Contrôle total" pour que les droits NTFS régulent ensuite
+    mais des problèmes ont été rencontrés à ce niveau, et "Contrôle total" est ajouté ensuite manuellement par l'administrateur
 
     PARAMETRES
     $Prefix (string) : préfixe du groupe : DL-NomEntreprise-NomFichier
