@@ -1,4 +1,4 @@
-﻿#............................Import des constantes
+#............................Import des constantes
 . C:\Users\Administrateur\PWSAD\CSTES\constsPathsModules.ps1
 . C:\Users\Administrateur\PWSAD\CSTES\constsPathsOU.ps1
 . C:\Users\Administrateur\PWSAD\CSTES\constsPathsAGDLP.ps1
@@ -277,11 +277,16 @@ function TYPE_AJOUT{
             }
         }
         else{
-            Write-Host "Unite(s) d'organisation(s) introuvable(s).`nVeuillez verifier l'existence de l'OU de l'entreprise ainsi que de ses sous-unites." -ForegroundColor Red
+            if(-not($existsPathGG)){
+                Write-Host "OU 'Groupes globaux' introuvable pour $nomEntreprise.`nVeuillez verifier l'existence de cette sous-unite d'organisation." -ForegroundColor Red
+            }
+            if(-not($existsPathDL)){
+                Write-Host "OU 'Groupes domaine local' introuvable pour $nomEntreprise.`nVeuillez verifier l'existence de cette sous-unite d'organisation." -ForegroundColor Red
+            }
         }
     }
     else{
-        Write-Host "Unite(s) d'organisation(s) introuvable(s).`nVeuillez verifier l'existence de l'OU de l'entreprise ainsi que de ses sous-unites." -ForegroundColor Red
+        Write-Host "Unite d'organisation de l'entreprise $nomEntreprise introuvable.`nVeuillez verifier l'existence de l'OU de l'entreprise." -ForegroundColor Red
     }
 }
 
