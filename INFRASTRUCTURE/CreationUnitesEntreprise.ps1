@@ -1,4 +1,4 @@
-﻿#............................Import des constantes
+#............................Import des constantes
 . C:\Users\Administrateur\PWSAD\CSTES\constsPathsModules.ps1
 . C:\Users\Administrateur\PWSAD\CSTES\constsPathsOU.ps1
 
@@ -7,7 +7,7 @@ Import-Module $pathAffichages -Verbose
 Import-Module $pathVerifications -Verbose
 
 #............................Declaration de variables
-[array]$sousOU = @("Groupes globaux","Utilisateurs","Ordinateurs")
+[array]$sousOU = @("Groupes globaux","Groupes domaine local","Utilisateurs","Ordinateurs")
 [string]$nomEntreprise = ""
 
 #............................Fonctions
