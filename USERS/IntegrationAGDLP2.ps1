@@ -107,6 +107,14 @@ function GIVE_RIGHTS {
 }
 
 function CREATE_FILE {
+    <#
+
+    fonction CREATE_FILE
+
+    DESCRIPTION
+    Création du fichier à partager
+
+    #>
     param(
         [Parameter(Mandatory=$True)][string]$FirmName,
         [Parameter(Mandatory=$true)][string]$PathGG,
@@ -119,10 +127,15 @@ function CREATE_FILE {
         "CT" = "Controle total"
     }
 
+    #Saisie du chemin du fichier par l'utilisateur
     Write-Host "`nChemin du fichier : " -ForegroundColor Yellow -NoNewLine
     [string]$pathFile = Read-Host
+
+    #Teste si le fichier existe
     $file_exists = Test-Path $pathFile
     $nameFile = Split-Path $pathFile -Leaf
+
+    #Créer le dossier s'il n'existe pas
     if(-not($file_exists)){
         $createFile = Entry -Question "Le dossier n'existe pas. Creer le dossier ? "
         if($createFile -eq "Y"){
@@ -130,6 +143,8 @@ function CREATE_FILE {
         }
     }
     Write-Host `n
+
+    #Création de trois groupes domaines local ayant pour nom "DL-nomEntreprise-NomFichier-droit" avec droit \in {"L","LM","CT"}
     if($file_exists){
         foreach($key in $dicoRights.Keys){
             $groupDLName = "{0}-{1}-{2}-{3}" -f "DL",$nomCapitales,$nameFile,$key
@@ -142,10 +157,14 @@ function CREATE_FILE {
             }
         }
 
+        #récupération des groupes domaine local fraîchement créés
         $prefix = "DL-$nomCapitales-$nameFile"
         $ensObjDLRights = Get-ADGroup -Filter "Name -like '$prefix*'" -SearchBase $pathDL
 
+        #Récupération des groupes globaux de l'entreprise
         $ensObjGG = Get-ADGroup -SearchBase $pathGG -Filter *
+
+        #Affichage des consignes et des groupes globaux associés à un chiffre
         Write-Host "`nAjout de groupes globaux aux groupes domaine local"-ForegroundColor DarkYellow
         Write-Host "---------------------------------------------------" -ForegroundColor DarkYellow
         Write-Host "> Taper [0] pour passer au groupe suivant.`n> Entrer un nom parmi la liste proposee ci-dessous : " -ForegroundColor Gray
@@ -156,23 +175,40 @@ function CREATE_FILE {
             $dictGG[$i] = $elementGG
             $i += 1
         }
+
+        #Préparations de variables pour les boucles
         [int]$nbGGTot = $i - 1
         [bool]$error = $true
         [bool]$globalError = $true
+
         foreach($elementDL in $ensObjDLRights){
+
+            #Affichage sucessif d'un des trois groupes domaine local (en cyan)
             Write-Host "`nGroupe [$($elementDL.Name)]" -ForegroundColor Cyan
+
             [int]$nbGG = 0
             do {
+                #Invitation à saisir le chiffre correspondant au groupe global à ajouter au groupe domaine local
                 $input = Read-Host "Numero du groupe"
-            } while (-not [int]::TryParse($input, [ref]$nbGG) -or $nbGG -lt 0 -or $nbGG -gt $nbGGTot)
+
+            } while (-not [int]::TryParse($input, [ref]$nbGG) -or $nbGG -lt 0 -or $nbGG -gt $nbGGTot) #Contrôle de saisie
+
+            #Récupération du groupe global à partir du numéro saisi
             $GrGG = $dictGG[$nbGG]
+
+            #Tant que l'utilisateur n'a pas tapé 0 (et que le numéro reste correct), on réitère la demande d'ajout de groupes
             while($nbGG -gt 0 -and $nbGG -le $nbGGTot){
                 $groupeGG = $ensObjGG | Where-Object Name -eq $($GrGG.Name)
                 if($null -ne $groupeGG){
                     $error = Success_Fail -Text "Ajout du groupe global" -SpecificText $($dictGG[$nbGG].Name) -Action {Add-ADGroupMember -Identity $elementDL -Members $groupeGG -ErrorAction Stop}
                     $globalError = $globalError -and $error
                 }
-                $nbGG = Read-Host "Numero du groupe"
+                
+                do {                                                                                          
+                    #Invitation à saisir le chiffre correspondant au groupe global suivant à ajouter          
+                    $input = Read-Host "Numero du groupe"                                                     
+                } while (-not [int]::TryParse($input, [ref]$nbGG) -or $nbGG -lt 0 -or $nbGG -gt $nbGGTot) #Contrôle de saisie
+                $GrGG = $dictGG[$nbGG] #Récupération du nouveau groupe global à partir du numéro saisi        # (correction bug : sans cette ligne, le groupe sélectionné n'était jamais mis à jour)
             }
         }
         if($globalError){
