@@ -32,6 +32,32 @@ function GIVE_RIGHTS {
     DESCRIPTION
     Attribution des droits NTFS
 
+    PARAMETRES
+    $Prefix (string) : préfixe du groupe : DL-NomEntreprise-NomFichier
+    $PathDL (string) : path du groupe domaine local auquel on attribue les droits
+    $FileName (string) : nom du fichier à partager
+    $FilePath (string) : path du fichier à partager
+
+    VARIABLES
+    $DLGroups : ensemble des groupes domaine local commençant par le préfixe
+    $dicoSMB : dictionnaire faisant correspondre le suffixe des droits ("L", "LM" ou "CT") aux droits SMB
+    $dicoNTFS : dictionnaire faisant correspondre le suffixe des droits aux droits NTFS
+    $currentUser : nom de l'utilisateur courant (l'administrateur)
+    $element : variable d'itération sur les éléments de $DLGroups
+    $suffixe (string) : suffixe ("L", "LM" ou "CT") en fin du nom du groupe domaine local
+    $droitPartage : récupération du droit SMB associé au suffixe du groupe
+    $droitNTFS : syntaxe d'attribution des droits NTFS (elementConcerne: (OI)(CI)(M))
+
+    TYPE DE RETOUR
+    void (partage de fichiers)
+
+    NOTES PERSONNELLES
+    Syntaxe icacls
+    OI : Object Inherit — les fichiers contenus hériteront du droit
+    CI : Container Inherit — les sous-dossiers contenus hériteront du droit
+    IO : Inherit Only — le droit s'applique uniquement par héritage, pas à l'objet lui-même
+    NP : No Propagate — l'héritage s'arrête au niveau suivant (ne se propage pas plus loin)
+
     #>
     param(
         [Parameter(Mandatory=$True)][string]$Prefix,
@@ -39,6 +65,7 @@ function GIVE_RIGHTS {
         [Parameter(Mandatory=$True)][string]$FileName,
         [Parameter(Mandatory=$True)][string]$FilePath
     )
+
     $DLGroups = Get-ADGroup -Filter "Name -like '$Prefix*'" -SearchBase $pathDL
 
     $dicoSMB = @{
@@ -56,11 +83,20 @@ function GIVE_RIGHTS {
     $currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 
     New-SmbShare -Name $FileName -Path $FilePath -FullAccess $currentUser
+
+    #Nettoyage des permissions par défaut
     icacls $FilePath /inheritance:d
     icacls $FilePath /remove *S-1-5-32-545 /T
+
+
     foreach($element in $DLgroups){
+        #Récupération du suffixe ("L", "LM" ou "CT")
         $suffixe = $($element.Name).Split("-")[-1]
+
+        #Conversion du suffixe en droit SMB (string -> string)
         $droitPartage = $dicoSMB[$suffixe]
+
+        #Attribution du droit NTFS
         $droitNTFS = "{0}:(OI)(CI)({1})" -f $($element.Name),$dicoNTFS[$suffixe]
         Grant-SmbShareAccess -Name $FileName -AccountName $element.Name -AccessRight $droitPartage -Force
         icacls $FilePath /grant $droitNTFS /T
